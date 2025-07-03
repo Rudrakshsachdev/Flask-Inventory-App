@@ -1,0 +1,104 @@
+<!-- inventory/templates/dashboard.html -->
+{% extends 'base.html' %} {% block title %}Dashboard{% endblock %} {% block
+content %}
+<div class="card shadow-sm mb-4">
+  <div
+    class="card-header bg-dark text-white d-flex justify-content-between align-items-center"
+  >
+    <h5 class="mb-0">📦 Product Inventory</h5>
+    <div>
+      {% if current_user.role == 'admin' %}
+      <a
+        href="{{ url_for('main.add_product') }}"
+        class="btn btn-sm btn-outline-light"
+        >➕ Add Product</a
+      >
+      {% endif %}
+
+      <a
+        href="{{ url_for('main.create_order') }}"
+        class="btn btn-outline-warning btn-sm"
+        >🛒 Create Order</a
+      >
+    </div>
+  </div>
+
+  <div class="card-body">
+    {% if products %}
+    <div class="table-responsive">
+      <table
+        class="table table-hover align-middle table-bordered table-striped animate-table"
+      >
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price (₹)</th>
+            <th>Quantity</th>
+            <th>Added On</th>
+            <th>Description</th>
+            <th>Image</th>
+            <!-- ✅ Image column fixed -->
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <td>{{ product.id }}</td>
+            <td><strong>{{ product.name }}</strong></td>
+            <td>₹{{ '%.2f'|format(product.price) }}</td>
+            <td>
+              {% if product.quantity > 10 %}
+              <span class="badge bg-success">{{ product.quantity }}</span>
+              {% elif product.quantity > 0 %}
+              <span class="badge bg-warning text-dark"
+                >{{ product.quantity }}</span
+              >
+              {% else %}
+              <span class="badge bg-danger">Out of Stock</span>
+              {% endif %}
+            </td>
+            <td>{{ product.created_at.strftime('%Y-%m-%d') }}</td>
+            <td>{{ product.description or '-' }}</td>
+            <td>
+              {% if product.image %}
+              <img
+                src="{{ url_for('static', filename='uploads/' + product.image) }}"
+                width="50"
+                height="50"
+                class="rounded shadow-sm border"
+              />
+              {% else %}
+              <span class="text-muted">No image</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if current_user.role == 'admin' %}
+              <a
+                href="{{ url_for('main.edit_product', id=product.id) }}"
+                class="btn btn-sm btn-outline-primary"
+                >✏️ Edit</a
+              >
+              <a
+                href="{{ url_for('main.delete_product', id=product.id) }}"
+                class="btn btn-sm btn-outline-danger"
+                onclick="return confirm('Are you sure?');"
+                >🗑 Delete</a
+              >
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-muted">
+      No products found.
+      <a href="{{ url_for('main.add_product') }}">Add one?</a>
+    </p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

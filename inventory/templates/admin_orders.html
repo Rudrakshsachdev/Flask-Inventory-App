@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Manage Orders{% endblock %}
+
+{% block content %}
+<div class="card mt-4 shadow-sm">
+  <div class="card-header bg-dark text-white d-flex justify-content-between">
+    <h5 class="mb-0">📋 Admin - Manage Orders</h5>
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-light btn-sm">🏠 Back to Dashboard</a>
+  </div>
+  <div class="card-body">
+    {% if orders %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Customer</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Ordered On</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.product.name }}</td>
+            <td>{{ order.customer_name }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>
+              <span class="badge bg-info">{{ order.status or 'Pending' }}</span>
+            </td>
+            <td>{{ order.created_at.strftime('%Y-%m-%d') }}</td>
+            <td>
+              <a href="{{ url_for('main.update_order_status', order_id=order.id) }}" class="btn btn-sm btn-outline-primary">📝 Update</a>
+              <a href="{{ url_for('main.delete_order', order_id=order.id) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this order?');">🗑 Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-muted">No orders yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

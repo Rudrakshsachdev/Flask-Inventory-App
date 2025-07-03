@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Edit Product{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="card shadow-sm p-4">
+    <h4 class="mb-4">✏️ Edit Product</h4>
+    <form method="POST" enctype="multipart/form-data">
+      
+      <div class="mb-3">
+        <label for="name" class="form-label">Product Name</label>
+        <input type="text" class="form-control" name="name" id="name" value="{{ product.name }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3">{{ product.description }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price (₹)</label>
+        <input type="number" class="form-control" name="price" id="price" step="0.01" value="{{ product.price }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="number" class="form-control" name="quantity" id="quantity" value="{{ product.quantity }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Current Image</label><br>
+        {% if product.image %}
+          <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}" width="100" class="img-thumbnail mb-2">
+        {% else %}
+          <p class="text-muted">No image uploaded.</p>
+        {% endif %}
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload New Image</label>
+        <input type="file" class="form-control" name="image" id="image">
+      </div>
+
+      <button type="submit" class="btn btn-primary">💾 Save Changes</button>
+      <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">🔙 Back</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

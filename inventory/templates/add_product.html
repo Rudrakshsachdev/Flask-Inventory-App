@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block title %}Add Product{% endblock %} {% block
+content %}
+<div class="card shadow-sm">
+  <div class="card-header bg-primary text-white">
+    <h4 class="mb-0">Add New Product</h4>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="{{ url_for('main.add_product') }}" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="name" class="form-label">Product Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          id="description"
+          name="description"
+          rows="3"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price (₹)</label>
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          name="price"
+          required
+          step="0.01"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input
+          type="number"
+          class="form-control"
+          id="quantity"
+          name="quantity"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label>Product Image</label>
+        <input type="file" name="image" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-success">Add Product</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

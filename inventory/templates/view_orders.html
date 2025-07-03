@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}All Orders{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-secondary text-white">
+        <h4>🧾 Order History</h4>
+    </div>
+    <div class="card-body">
+        {% if orders %}
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer_name }}</td>
+                    <td>{{ order.product.name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>
+                        {% if order.status == 'Completed' %}
+                            <span class="badge bg-success">Completed</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">{{ order.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ order.order_date.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No orders found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

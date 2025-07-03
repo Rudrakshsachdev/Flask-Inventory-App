@@ -1,0 +1,125 @@
+/* ===== General Reset & Body ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    line-height: 1.6;
+    transition: background-color 0.3s ease;
+}
+
+/* ===== Navigation Bar ===== */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #ffc107 !important;
+}
+
+/* ===== Container & Cards ===== */
+.container {
+    max-width: 720px;
+    margin: auto;
+}
+
+.card {
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    animation: slideIn 0.4s ease;
+}
+
+.card-header {
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+/* ===== Forms ===== */
+form label {
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+form input, form textarea {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    outline: none;
+}
+
+/* ===== Button Animation ===== */
+.btn-success {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border-radius: 8px;
+    padding: 0.6rem 1.4rem;
+}
+
+.btn-success:hover {
+    background-color: #198754;
+    transform: scale(1.03);
+}
+
+/* ===== Alerts ===== */
+.alert {
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease;
+}
+
+/* ===== Animations ===== */
+@keyframes slideIn {
+    from {
+        transform: translateY(15px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animation for the table */
+.animate-table {
+    animation: fadeInUp 0.6s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

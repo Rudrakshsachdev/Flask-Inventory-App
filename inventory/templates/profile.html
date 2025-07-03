@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="card mt-4 p-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <h4 class="mb-4">👤 User Profile</h4>
+
+  <p><strong>ID:</strong> {{ user.id }}</p>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Registered On:</strong> {{ user.created_at.strftime('%Y-%m-%d') }}</p>
+
+  {% if user.profile_image %}
+    <img src="{{ url_for('static', filename='profiles/' ~ user.profile_image) }}" width="150" class="rounded-circle mb-3">
+  {% else %}
+    <p class="text-muted">No profile picture uploaded</p>
+  {% endif %}
+
+  <div class="d-grid gap-2">
+    <a href="{{ url_for('auth.edit_profile') }}" class="btn btn-outline-primary">✏️ Edit Profile</a>
+    <a href="{{ url_for('auth.change_password') }}" class="btn btn-outline-warning">🔑 Change Password</a>
+    <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">🚪 Logout</a>
+  </div>
+</div>
+{% endblock %}

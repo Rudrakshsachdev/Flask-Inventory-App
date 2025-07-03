@@ -1,0 +1,16 @@
+<!-- templates/admin_verify.html -->
+{% extends 'base.html' %}
+{% block title %}Admin OTP Verification{% endblock %}
+
+{% block content %}
+<div class="card mt-4 p-4 shadow-sm" style="max-width: 500px; margin: auto;">
+    <h4 class="mb-3">📧 Enter OTP</h4>
+    <form method="POST">
+        <div class="mb-3">
+            <label>Enter OTP sent to your email</label>
+            <input type="text" name="otp" class="form-control" placeholder="6-digit OTP" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Verify</button>
+    </form>
+</div>
+{% endblock %}
